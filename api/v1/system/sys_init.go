@@ -25,7 +25,7 @@ type DbInitCreateDbReq struct {
 	DbUser       string `json:"dbUser" p:"dbUser" v:"required#数据库用户名称必须"`
 	DbPass       string `json:"dbPass"`
 	DbName       string `json:"dbName" p:"dbName" v:"required#数据库名称必须"`
-	DbCharset    string `json:"dbCharset" p:"dbCharset" v:"required#数据库编码必须"`
+	DbCharset    string `json:"dbCharset" p:"dbCharset"`
 	RedisAddress string `json:"redisAddress" p:"redisAddress" v:"required#Redis地址必须"`
 	RedisPort    int    `json:"redisPort" p:"redisPort" v:"required#Redis端口必须"`
 	RedisDb      int    `json:"redisDb" p:"redisDb" v:"required#Redis索引必须"`
@@ -43,7 +43,7 @@ func (req *DbInitCreateDbReq) ToDbInitConfig() *model.DbInitConfig {
 				User:        req.DbUser,
 				Pass:        req.DbPass,
 				Name:        req.DbName,
-				Type:        "mysql",
+				Type:        "pgsql",
 				Role:        "master",
 				Debug:       true,
 				Charset:     req.DbCharset,
