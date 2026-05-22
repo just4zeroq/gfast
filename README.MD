@@ -72,9 +72,18 @@
 [http://v3.g-fast.cn/sys](http://v3.g-fast.cn/sys)
 账号：demo  密码：123456
 ## 配置
-项目数据库文件 `resource/data/db.sql` 创建数据库导入后修改配置 `manifest/config/config.yaml.bak` 复制改为`manifest/config/config.yaml`
+项目数据库文件 `resource/data/gfast-v32.sql`（PostgreSQL 14+）。
 
-其中gfToken配置
+创建数据库并导入数据：
+
+```bash
+createdb -U postgres token_flux -E UTF8
+psql -U postgres -d token_flux -f resource/data/gfast-v32.sql
+```
+
+然后将配置模板复制为运行配置：`cp manifest/config/config.yaml.bak manifest/config/config.yaml`，并按需修改 `database.default.link` 中的用户名、密码和库名。
+
+其中 gfToken 配置：
 ```yaml
 gfToken:
   cacheKey: "gfToken_"   #缓存前缀
