@@ -42,9 +42,8 @@ database:
     RotateBackupCompress: 9
 
   default:
-    link:   "mysql:root:123456@tcp(localhost:3306)/gfast-v32github?charset=utf8mb4&parseTime=true&loc=Local"
+    link:   "pgsql:postgres:123456@tcp(localhost:5432)/token_flux?sslmode=disable"
     debug:  true
-    charset: "utf8mb4" #数据库编码
     dryRun: false #空跑
     maxIdle: 10 #连接池最大闲置的连接数
     maxOpen: 10 #连接池最大打开的连接数
