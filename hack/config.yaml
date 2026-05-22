@@ -2,7 +2,7 @@
 gfcli:
   gen:
     dao:
-      - link:            "mysql:gfast3:gfast333@tcp(127.0.0.1:3306)/gfast-v32"
+      - link:            "pgsql:postgres:123456@tcp(127.0.0.1:5432)/token_flux"
         tables:          "sys_role_dept"
         removePrefix:    "gf_"
         descriptionTag:  true
