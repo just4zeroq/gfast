@@ -14,8 +14,18 @@ import (
 var (
 	Migrate = gcmd.Command{
 		Name:  "migrate",
-		Usage: "migrate",
+		Usage: "migrate <up|down|status|create> [name]",
 		Brief: "database migration management (goose)",
+		Arguments: []gcmd.Argument{
+			{
+				Name:  "action",
+				IsArg: true,
+			},
+			{
+				Name:  "name",
+				IsArg: true,
+			},
+		},
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			action := parser.GetArg(2).String()
 			if action == "" {
