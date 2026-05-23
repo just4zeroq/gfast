@@ -72,16 +72,33 @@
 [http://v3.g-fast.cn/sys](http://v3.g-fast.cn/sys)
 账号：demo  密码：123456
 ## 配置
-项目数据库文件 `resource/data/gfast-v32.sql`（PostgreSQL 14+）。
 
-创建数据库并导入数据：
+### 数据库初始化
 
+项目使用 [goose](https://github.com/pressly/goose) 进行数据库迁移管理。
+
+1. 创建 PostgreSQL 数据库：
 ```bash
 createdb -U postgres token_flux -E UTF8
-psql -U postgres -d token_flux -f resource/data/gfast-v32.sql
 ```
 
-然后将配置模板复制为运行配置：`cp manifest/config/config.yaml.bak manifest/config/config.yaml`，并按需修改 `database.default.link` 中的用户名、密码和库名。
+2. 复制配置模板并修改数据库连接信息：
+```bash
+cp manifest/config/config.yaml.bak manifest/config/config.yaml
+# 按需修改 database.default.link 中的用户名、密码和库名
+```
+
+3. 启动应用，迁移自动执行（`database.migration.autoMigrate: true`）：
+```bash
+go run main.go
+```
+
+或手动执行迁移：
+```bash
+go run main.go migrate up
+```
+
+迁移文件位于 `resource/migrations/`，版本记录表为 `goose_db_version`。
 
 其中 gfToken 配置：
 ```yaml
