@@ -49,6 +49,11 @@ database:
     maxOpen: 10 #连接池最大打开的连接数
     maxLifetime: "30s" #(单位秒)连接对象可重复使用的时间长度
 
+  migration:
+    autoMigrate: true
+    dir: "resource/migrations"
+    tableName: "goose_db_version"
+
 gfToken:
   cacheKey: "gfToken:"
   timeOut: 10800
