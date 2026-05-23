@@ -10,6 +10,7 @@ require (
 	github.com/gogf/gf/v2 v2.10.0
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/mssola/user_agent v0.5.3
+	github.com/pressly/goose/v3 v3.27.1
 	github.com/shirou/gopsutil/v3 v3.23.2
 	github.com/tiger1103/gfast-cache v1.0.12
 	github.com/tiger1103/gfast-token v1.0.10
@@ -55,7 +56,6 @@ require (
 	github.com/olekukonko/tablewriter v1.1.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
-	github.com/pressly/goose/v3 v3.27.1 // indirect
 	github.com/redis/go-redis/v9 v9.12.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sethvargo/go-retry v0.3.0 // indirect
