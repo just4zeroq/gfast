@@ -1,3 +1,6 @@
+-- +goose Up
+-- +goose StatementBegin
+
 /*
  GFast V3.2 PostgreSQL 初始化脚本
  Target: PostgreSQL 14+
@@ -560,3 +563,25 @@ INSERT INTO sys_user_post (user_id, post_id) VALUES
 (37, 3),
 (38, 2), (38, 3),
 (42, 2), (42, 3);
+
+-- +goose StatementEnd
+
+-- +goose Down
+-- +goose StatementBegin
+
+DROP TABLE IF EXISTS sys_user_post;
+DROP TABLE IF EXISTS sys_user_online;
+DROP TABLE IF EXISTS sys_user;
+DROP TABLE IF EXISTS sys_role_dept;
+DROP TABLE IF EXISTS sys_role;
+DROP TABLE IF EXISTS sys_post;
+DROP TABLE IF EXISTS sys_oper_log;
+DROP TABLE IF EXISTS sys_login_log;
+DROP TABLE IF EXISTS sys_dict_type;
+DROP TABLE IF EXISTS sys_dict_data;
+DROP TABLE IF EXISTS sys_dept;
+DROP TABLE IF EXISTS sys_config;
+DROP TABLE IF EXISTS sys_auth_rule;
+DROP TABLE IF EXISTS casbin_rule;
+
+-- +goose StatementEnd
