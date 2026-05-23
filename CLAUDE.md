@@ -90,3 +90,26 @@ docs/superpowers/                # specs + plans for non-trivial features (curre
   - `tinyint` from old MySQL maps to `smallint`; gdb decodes it transparently to `int`/`bool`. No code changes needed.
 - **When the schema changes:** update `resource/data/gfast-v32.sql` directly (no migration framework). Regenerate DAOs with `gf gen dao` if you add/modify tables.
 - **Don't add backwards-compat shims for MySQL.** The migration is complete and MySQL support is intentionally removed.
+
+## 数据库迁移 (Goose)
+
+迁移文件位于 `resource/migrations/`，通过 `//go:embed` 嵌入二进制。
+
+### 自动迁移
+- 启动时默认执行 `goose Up`，由 `database.migration.autoMigrate` 开关控制
+- 配置 `database.migration.autoMigrate: false` 可关闭自动迁移
+- 迁移失败会 `Fatal` 退出（schema 不一致比服务不可用更危险）
+- 迁移版本表：`goose_db_version`（可通过 `database.migration.tableName` 自定义）
+
+### CLI 手动操作
+```bash
+go run main.go migrate up              # 执行所有待运行的迁移
+go run main.go migrate down            # 回退最近一个迁移
+go run main.go migrate status          # 查看当前版本状态
+go run main.go migrate create <name> sql  # 创建新迁移文件
+```
+
+### 新建迁移
+1. `go run main.go migrate create add_xxx sql` → 在 `resource/migrations/` 下生成 `NNNNN_add_xxx.sql`
+2. 填写 `-- +goose Up` 和 `-- +goose Down` 块
+3. 重新编译（embed 自动包含新文件）
